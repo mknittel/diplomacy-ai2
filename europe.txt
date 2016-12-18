@@ -26,7 +26,7 @@ Gas, Bre, Par, Bur, Mar, Spa
 Mar, Pie, Spa, Gas, Bur
 Par, Bur, Gas, Bre, Pic
 Pic, Bel, Bur, Par, Bre
-Ber, Pru, Sil, Mun, Kie,
+Ber, Pru, Sil, Mun, Kie
 Kie, Den, Ber, Mun, Ruh, Hol
 Mun, Ber, Sil, Boh, Tri, Bur, Ruh, Kie
 Pru, Lvn, War, Sil, Ber
@@ -133,7 +133,7 @@ Swe, Nwy, Den, Fin
 Tun, Naf
 Den, Kie
 -
-Neutral supply centers:
+Centers:
 Por
 Spa
 Bel
