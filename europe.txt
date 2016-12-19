@@ -107,7 +107,7 @@ Pie, Mar, Tus
 Rom, Tus, Nap
 Tus, Pie, Rom
 Ven, Tri, App
-Lvn, Pru, Str
+Lvn, Pru, Stp
 Sev, Rum, Arm
 Stp, Nwy
 Stp, Lvn, Fin
@@ -131,7 +131,7 @@ Spa, Por, Gas
 Spa, Por, Mar
 Swe, Nwy, Den, Fin
 Tun, Naf
-Den, Kie
+Den, Kie, Swe
 -
 Centers:
 Por

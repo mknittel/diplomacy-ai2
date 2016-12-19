@@ -1,8 +1,4 @@
-from actions import Action
-from actions import Hold
-from actions import Move
-from actions import Convoy
-from actions import Support
+from actions import Action, Hold, Move, Convoy, Support, Retreat
 
 class Parser:
     def __init__(self):
@@ -10,6 +6,12 @@ class Parser:
         self.moves = {}
         self.convoys = {}
         self.supports = {}
+
+    def restart(self):
+        self.holds.clear()
+        self.moves.clear()
+        self.convoys.clear()
+        self.supports.clear()
 
     def read_board(self, filename):
         f = open(filename, 'r')
@@ -53,6 +55,52 @@ class Parser:
 
         return players, land_provinces, sea_provinces, coasts, centers
 
+    def read_builds(self, filename):
+        f = open(filename, 'r')
+        player = ""
+        builds = {}
+
+        for line in f:
+            line = line[:-1]
+            words = line.split(" ")
+
+            if line != "-":
+                if player != "" and player not in builds.keys():
+                    builds[player] = [words]
+                elif player != "":
+                    builds[player].append(words)
+                else:
+                    player = line
+            else:
+                player = ""
+
+        f.close()
+
+        return builds
+
+    def read_retreats(self, filename):
+        f = open(filename, 'r')
+        player = ""
+        retreats = {}
+
+        for line in f:
+            line = line[:-1]
+            words = line.split(" ")
+            
+            if line != "-":
+                if player != "" and player not in retreats.keys():
+                    retreats[player] = [words]
+                elif player != "":
+                    retreats[player].append(words)
+                else:
+                    player = line
+            else:
+                player = ""
+        
+        f.close()
+
+        return retreats
+
     def read_actions(self, filename):
         f = open(filename, 'r')
         player = ""
@@ -63,7 +111,7 @@ class Parser:
 
             if line != "-":
                 if player != "":
-                    self.make_action(words, player)
+                    self.make_action(words)
                 else:
                     player = line
             else:
@@ -74,17 +122,18 @@ class Parser:
     def get_actions(self):
         return self.holds, self.moves, self.convoys, self.supports
 
-    def make_action(self, words, player):
+    def make_action(self, words):
         act = words[2]
         loc = words[1]
 
         if act == "hold":
-            hold = Hold(loc, player)
+            hold = Hold(loc)
             self.holds[loc] = hold
         elif act == "to":
-            move = Move(loc, words[3], player)
+            move = Move(loc, words[3])
             self.moves[loc] = move
         elif act == "convoy":
+            # Can only convoy self
             convoyee = words[4]
 
             if convoyee in self.convoys:
@@ -92,7 +141,7 @@ class Parser:
                 convoy.convoys.append(loc)
                 self.convoys[convoyee] = convoy
             else:
-                convoy = Convoy(convoyee, words[6], [loc], player)
+                convoy = Convoy(convoyee, words[6], [loc])
                 self.convoys[convoyee] = convoy
         elif act == "support":
             support_act = words[5]
@@ -101,14 +150,14 @@ class Parser:
             if support_act == "hold":
                 if support_loc in self.holds:
                     hold = self.holds[support_loc]
-                    support = Support(loc, hold, player)
+                    support = Support(loc, hold)
                     self.supports[loc] = support
                 else:
                     print "Error: invalid hold support", words
             elif support_act == "to":
                 if support_loc in self.moves:
                     move = self.moves[support_loc]
-                    support = Support(loc, move, player)
+                    support = Support(loc, move)
                     self.supports[loc] = support
                 else:
                     print "Error: invalid move support", words
@@ -117,7 +166,7 @@ class Parser:
 
                 if dest in self.convoys:
                     convoy = self.convoys[dest]
-                    support = Support(loc, convoy, player)
+                    support = Support(loc, convoy)
                     self.supports[loc] = support
                 else:
                     print "Error: invalid convoy support:", words

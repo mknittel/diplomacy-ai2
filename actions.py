@@ -1,42 +1,69 @@
 class Action:
-    def __init__(self, start, player):
+    def __init__(self, start):
         self.start = start
-        self.player = player
+        self.action_power = 1
+        self.hold_power = 1
+
+    def add_power(self):
+        self.action_power += 1
 
     def print_action(self):
-        print "Action on", self.start, "by", self.player
+        print "Action on", self.start
 
 class Hold(Action):
-    def __init__(self, start, player):
-        Action.__init__(self, start, player)
+    def __init__(self, start):
+        self.is_hold = True
+        self.action_type = "Hold"
+        Action.__init__(self, start)
 
     def print_action(self):
-        print "Hold at", self.start, "by", self.player
+        print "Hold at", self.start
+
+    def add_power(self):
+        self.action_power += 1
+        self.hold_power += 1
 
 class Move(Action):
-    def __init__(self, start, dest, player):
+    def __init__(self, start, dest):
+        self.is_hold = False
         self.dest = dest
-        Action.__init__(self, start, player)
+        self.action_type = "Move"
+        Action.__init__(self, start)
 
     def print_action(self):
-        print "Move from", self.start, "to", self.dest, "by", self.player
+        print "Move from", self.start, "to", self.dest
+
+    def add_power(self):
+        self.action_power += 1
 
 class Convoy(Action):
-    def __init__(self, start, dest, convoys, player):
+    def __init__(self, start, dest, convoys):
+        self.is_hold = False
         self.dest = dest
+        self.action_type = "Convoy"
         self.convoys = convoys
-        Action.__init__(self, start, player)
+        Action.__init__(self, start)
 
     def print_action(self):
-        print "Convoy from", self.start, "to", self.dest, "via", self.convoys, "by", self.player
+        print "Convoy from", self.start, "to", self.dest, "via", self.convoys
+
+    def add_power(self):
+        self.action_power += 1
 
 class Support:
-    def __init__(self, loc, action, player):
+    def __init__(self, loc, action):
         self.loc = loc
         self.action = action
-        self.player = player
+        self.action_type = "Support"
 
     def print_action(self):
-        print "Action by", self.player, "at", self.loc, "supports:"
+        print "Action at", self.loc, "supports:"
 
         self.action.print_action()
+
+class Retreat:
+    def __init__(self, loc):
+        self.loc = loc
+
+    def print_action(self):
+        print "Retreat at", self.loc
