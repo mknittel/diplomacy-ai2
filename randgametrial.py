@@ -5,10 +5,11 @@ import random
 from datetime import datetime
 
 class RandGameTrial:
-    def __init__(self, board, year):
+    def __init__(self, board, year, ai):
         self.board = board
         self.players = self.board.get_players()
         self.year = year
+        self.ai = ai
 
     def play(self):
         while True:
@@ -16,10 +17,10 @@ class RandGameTrial:
             winner = self.board.get_winner()
             
             if winner != None:
-                return winner 
+                return winner, winner == self.ai 
 
-            if self.year > 5000:
-                return None
+            if self.year > 2000:
+                return None, self.board.get_prop_centers(self.ai)
 
             self.play_build({}, None)
 

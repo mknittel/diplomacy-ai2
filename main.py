@@ -23,8 +23,8 @@ def main():
     """
 
 
-    for i in range(0, 100):
-        game = AIGame("map3.txt", "France")
+    for i in range(0, 10):
+        game = AIGame("europe.txt", "France")
         winner, nyears = game.play()
 
         print "Trial:", i

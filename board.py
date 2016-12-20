@@ -501,6 +501,24 @@ class Board:
 
         return None
 
+    def get_rank(self, player_name):
+        rank = 0
+
+        player = self.players[player_name]
+        num_centers = player.num_centers()
+
+        for other in self.players.values():
+            if other.num_centers() > num_centers:
+                rank += 1
+
+        return rank
+
+    def get_prop_centers(self, player_name):
+        player = self.players[player_name]
+        prop_centers = (1.0 * player.num_centers()) / self.num_centers
+
+        return prop_centers
+
     def get_builds(self):
         builds = []
         build_messages = []

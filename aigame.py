@@ -19,7 +19,7 @@ class AIGame:
         self.players.remove(self.ai)
 
         self.nnext = 20
-        self.ntrials = 400
+        self.ntrials = 250
 
     def play(self):
         while True:
@@ -57,17 +57,17 @@ class AIGame:
             build = deepcopy(build_set[index][0])
             board = deepcopy(self.board)
 
-            game = RandGameTrial(board, self.year + 1)
+            game = RandGameTrial(board, self.year + 1, self.ai)
             game.play_build(build, self.ai)
             game.play_moves({}, {}, {}, {}, None)
             game.play_moves({}, {}, {}, {}, None)
-            winner = game.play()
+            winner, prop = game.play()
 
             if winner != None:
                 build_set[index][1] += 1
 
             if winner == self.ai:
-                build_set[index][2] += 1
+                build_set[index][2] += prop
 
         index = 0
 
@@ -109,19 +109,19 @@ class AIGame:
             supports = deepcopy(action_set[index][3])
 
             board = deepcopy(self.board)
-            game = RandGameTrial(board, self.year + 1)
+            game = RandGameTrial(board, self.year + 1, self.ai)
             game.play_moves(holds, moves, convoys, supports, self.ai)
 
             if is_spring:
                 game.play_moves({}, {}, {}, {}, None)
 
-            winner = game.play()
+            winner, prop = game.play()
 
             if winner != None:
                 action_set[index][4] += 1
 
             if winner == self.ai:
-                action_set[index][5] += 1
+                action_set[index][5] += prop
 
         index = 0
 
@@ -171,19 +171,19 @@ class AIGame:
                 retreats = deepcopy(retreat_set[index][0])
 
                 board = deepcopy(self.board)
-                game = RandGameTrial(board, self.year + 1)
-                game.play_retreats(retreat_locs, retreats, is_spring)
+                game = RandGameTrial(board, self.year + 1, self.ai)
+                game.play_retreats(retreat_locs, retreats, self.ai)
 
                 if is_spring:
-                    game.play_moves({}, {}, {}, {}, is_spring)
+                    game.play_moves({}, {}, {}, {}, None)
 
-                winner = game.play()
+                winner, prop = game.play()
 
                 if winner != None:
                     retreat_set[index][1] += 1
 
                 if winner == self.ai:
-                    retreat_set[index][2] += 1
+                    retreat_set[index][2] += prop
 
             index = 0
 
