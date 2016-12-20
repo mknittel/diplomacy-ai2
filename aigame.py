@@ -18,7 +18,7 @@ class AIGame:
         self.ai = ai #self.players[index]
         self.players.remove(self.ai)
 
-        self.nnext = 5
+        self.nnext = 20
         self.ntrials = 400
 
     def play(self):
@@ -81,7 +81,16 @@ class AIGame:
                 if this_score > best_score:
                     index = i
 
-        self.board.auto_execute_builds(build_set[index][0])
+        builds = build_set[index][0]
+
+        random.seed(datetime.now())
+        random.shuffle(self.players)
+
+        for player in self.players:
+            builds[player] = self.board.get_all_rand_builds(player)[player]
+
+
+        self.board.auto_execute_builds(builds)
 
     def play_moves(self, is_spring):
         action_set = []
@@ -131,6 +140,17 @@ class AIGame:
         convoys = action_set[index][2]
         supports = action_set[index][3]
 
+        random.shuffle(self.players)
+
+        for player in self.players:
+            player_holds, player_moves, player_convoys, player_supports = self.board.get_all_rand_actions(player)
+
+            holds.update(player_holds)
+            moves.update(player_moves)
+            convoys.update(player_convoys)
+            supports.update(player_supports)
+
+
         retreat_locs = self.board.auto_execute_actions(holds, moves, convoys, supports)
 
         self.play_retreats(retreat_locs, is_spring)
@@ -141,21 +161,21 @@ class AIGame:
 
             for i in range(0, self.nnext):
                 retreats = {}
-                retreats[player] = self.board.get_all_rand_retreats(player)[player]
+                retreats[self.ai] = self.board.get_all_rand_retreats(self.ai)[self.ai]
                 retreat_set.append([retreats, 0, 0])
 
             for i in range(0, self.ntrials):
-                random.seet(datetime.now())
+                random.seed(datetime.now())
                 index = random.randint(0, self.nnext - 1)
 
                 retreats = deepcopy(retreat_set[index][0])
 
                 board = deepcopy(self.board)
                 game = RandGameTrial(board, self.year + 1)
-                game.play_retreats(retreat_locs, retreats)
+                game.play_retreats(retreat_locs, retreats, is_spring)
 
                 if is_spring:
-                    game.play_moves({}, {}, {}, {})
+                    game.play_moves({}, {}, {}, {}, is_spring)
 
                 winner = game.play()
 
@@ -168,7 +188,7 @@ class AIGame:
             index = 0
 
             for i in range(0, self.nnext):
-                if aretreat_set[index][1] == 0:
+                if retreat_set[index][1] == 0:
                     index = i
                 elif retreat_set[i][1] != 0:
                     this_score = (1.0 * retreat_set[i][2]) / retreat_set[i][1]
@@ -177,4 +197,11 @@ class AIGame:
                     if this_score > best_score:
                         index = i
 
-            self.board.auto_execute_retreats(retreat_set[index][0])
+            retreats = retreat_set[index][0]
+
+            random.shuffle(self.players)
+
+            for player in self.players:
+                retreats[player] = self.board.get_all_rand_retreats(player)[player]
+
+            self.board.auto_execute_retreats(retreats)
