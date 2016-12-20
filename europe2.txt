@@ -1,0 +1,140 @@
+Players:
+Italy, Ven
+Turkey, Con
+Austria, Vie
+Germany, Kie
+France, Par
+Britain, Edi
+Russia, Mos, War, Sev, Stp, Ser, Bul, Rum, Den, Swe, Nwy
+-
+Land provinces:
+Trl, Mun, Boh, Vie, Tri, Ven
+Boh, Sil, Gal, Vie, Trl, Mun
+Bud, Gal, Vie, Tri, Ser, Rum
+Gal, Vie, Boh, Sil, War, Ukr, Rum, Bud
+Tri, Bud, Vie, Trl, Ven, Alb, Ser
+Vie, Gal, Boh, Trl, Tri, Bud
+Cly, Edi, Lpl
+Edi, Cly, Yor, Lpl
+Lpl, Cly, Edi, Yor, Wal
+Lon, Wal, Yor
+Wal, Lpl, Yor, Lon
+Yor, Lpl, Edi, Lon, Wal
+Bre, Gas, Par, Pic
+Bur, Mun, Ruh, Bel, Pic, Par, Gas, Mar
+Gas, Bre, Par, Bur, Mar, Spa
+Mar, Pie, Spa, Gas, Bur
+Par, Bur, Gas, Bre, Pic
+Pic, Bel, Bur, Par, Bre
+Ber, Pru, Sil, Mun, Kie
+Kie, Den, Ber, Mun, Ruh, Hol
+Mun, Ber, Sil, Boh, Tri, Bur, Ruh, Kie
+Pru, Lvn, War, Sil, Ber
+Ruh, Kie, Mun, Bur, Bel, Hol
+Sil, Pru, War, Gal, Boh, Mun, Ber
+App, Nap, Rom, Ven
+Nap, App
+Pie, Ven, Tus, Mar
+Rom, App, Nap, Tus, Ven
+Tus, Ven, Rom, Pie
+Ven, Trl, Tri, App, Rom, Tus, Pie
+Lvn, Pru, War, Mos, Stp
+Mos, Stp, Lvn, War, Ukr, Sev
+Sev, Mos, Ukr, Rum, Arm
+Stp, Fin, Lvn, Mos
+Ukr, Mos, War, Gal, Rum, Sev
+War, Mos, Lvn, Pru, Sil, Gal, Ukr
+Ank, Con, Smy, Arm
+Arm, Ank, Smy, Syr, Sev
+Con, Ank, Smy, Bul
+Smy, Ank, Arm, Syr, Con
+Syr, Arm, Smy
+Alb, Gre, Ser, Tri
+Bel, Pic, Bur, Ruh, Hol
+Bul, Con, Gre, Ser, Rum
+Fin, Stp, Swe, Nwy
+Gre, Alb, Ser, Bul
+Hol, Kie, Ruh, Bel
+Nwy, Stp, Fin, Swe
+Naf, Tun
+Por, Spa
+Rum, Sev, Ukr, Gal, Bud, Ser, Bul
+Ser, Rum, Bul, Gre, Alb, Tri, Bud
+Spa, Gas, Mar, Por
+Swe, Nwy, Fin, Den
+Tun, Naf
+Den, Swe, Kie
+-
+Sea provinces:
+Adr, Tri, Ven, App, Ion, Alb
+Aeg, Gre, Con, Smy, Eas, Ion, Bul
+Bal, Bot, Lvn, Pru, Ber, Kie, Den, Swe
+Bar, Stp, Nwy, Nrg
+Bla, Sev, Arm, Ank, Con, Bul, Rum
+Eas, Syr, Smy, Aeg, Ion
+Eng, Lon, Wal, Iri, Mid, Bre, Pic, Bel
+Bot, Fin, Stp, Lvn, Bal, Swe
+Lyo, Tyn, Wes, Spa, Mar, Pie, Tus
+Hel, Den, Kie, Hol, Nth
+Ion, Eas, Aeg, Gre, Alb, Adr, App, Nap, Tyn, Tun
+Iri, Lpl, Wal, Eng, Mid, Nat
+Mid, Nat, Iri, Eng, Bre, Gas, Spa, Spa, Por, Naf
+Nat, Nrg, Cly, Iri, Mid
+Nth, Nwy, Ska, Den, Hel, Hol, Bel, Eng, Lon, Yor, Edi, Nrg
+Nrg, Bar, Nwy, Nth, Edi, Cly, Nat
+Ska, Swe, Den, Nth, Nwy, Bal
+Tyn, Tus, Rom, Nap, Ion, Tun, Wes, Lyo
+Wes, Lyo, Tyn, Tun, Naf, Spa
+-
+Coasts:
+Tri, Ven, Alb
+Cly, Edi, Lpl
+Edi, Cly, Yor
+Lpl, Cly, Wal
+Lon, Yor, Wal
+Wal, Lpl, Lon
+Yor, Edi, Lon
+Bre, Pic, Gas
+Gas, Bre, Spa
+Mar, Pie, Spa
+Pic, Bel, Bre
+Ber, Kie, Pru
+Kie, Ber, Den, Hol
+Pru, Lvn, Ber
+App, Ven, Nap
+Nap, Rom, App
+Pie, Mar, Tus
+Rom, Tus, Nap
+Tus, Pie, Rom
+Ven, Tri, App
+Lvn, Pru, Str
+Sev, Rum, Arm
+Stp, Nwy
+Stp, Lvn, Fin
+Ank, Arm, Con
+Arm, Sev, Ank
+Con, Ank, Smy, Bul, Bul
+Smy, Con, Syr
+Syr, Smy
+Alb, Tri, Gre
+Bel, Hol, Pic
+Bul, Con, Rum
+Bul, Con, Gre
+Fin, Swe, Stp
+Gre, Alb, Bul
+Hol, Bel, Kie
+Nwy, Stp, Swe
+Naf, Tun
+Por, Spa, Spa
+Rum, Sev, Bul
+Spa, Por, Gas
+Spa, Por, Mar
+Swe, Nwy, Den, Fin
+Tun, Naf
+Den, Kie, Swe
+-
+Centers:
+Por
+Spa
+-
+endoffile

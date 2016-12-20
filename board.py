@@ -213,8 +213,25 @@ class Board:
                 if unit_loc == loc:
                     return player
 
+            for unit_loc in player.retreats.keys():
+                if unit_loc == loc:
+                    return player
+
         print "Error: invalid unit fetch"
         return None
+
+    def print_moves(self, holds, moves, convoys, supports):
+        for hold in holds.values():
+            hold.print_action()
+
+        for move in moves.values():
+            move.print_action()
+
+        for convoy in convoys.values():
+            convoy.print_action()
+
+        for support in supports.values():
+            support.print_action()
 
     def get_all_rand_builds(self, player_name):
         player = self.players[player_name]
@@ -270,7 +287,7 @@ class Board:
         return builds
 
     def get_all_rand_actions(self, player_name):
-        units = {}
+        units = []
         holds = {}
         moves = {}
         convoys = {}
@@ -280,14 +297,12 @@ class Board:
         # Ensure pass by value
         for unit in player.units.values():
             new_unit = Unit(unit.unit_type, unit.loc)
-            units[unit.loc] = new_unit
+            units.append(unit)
 
-        while len(units.keys()) != 0:
-            random.seed(datetime.now())
-            index = random.randint(0, len(units.keys()) - 1)
+        random.seed(datetime.now())
+        random.shuffle(units)
 
-            unit_key = units.keys()[index]
-            unit = units.pop(unit_key, None)
+        for unit in units:
             action = self.get_rand_action(unit.loc, unit.unit_type, player_name, holds, moves, convoys, supports)
 
             if action.action_type == "Hold":
@@ -298,7 +313,6 @@ class Board:
                 convoys[action.start] = action
 
                 start = action.start
-                units.pop(start)
             else:
                 supports[action.loc] = action
 
@@ -317,6 +331,9 @@ class Board:
 
         for key in keys:
             unit = player.retreats[key]
+
+            if unit == None:
+                continue
 
             neighbors = self.get_neighbors(unit.loc, unit.unit_type)
             bad_neighbors = []

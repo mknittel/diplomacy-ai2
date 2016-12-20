@@ -39,8 +39,13 @@ class Player:
 
     def move(self, start, dest):
         unit = self.units.pop(start, None)
-        unit.loc = dest
-        self.units[dest] = unit
+
+        if unit == None:
+            unit = self.retreats.pop(start, None)
+
+        if unit != None:
+            unit.loc = dest
+            self.units[dest] = unit
 
     def place_retreat(self, start, dest):
         unit = self.retreats.pop(start, None)

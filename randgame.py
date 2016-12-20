@@ -11,20 +11,19 @@ class RandGame:
         self.year = 1900
 
     def play(self):
-        print "Welcome to Diplomacy! Good luck."
+        #print "Welcome to Diplomacy! Good luck."
 
         while True:
             self.board.update_centers()
             winner = self.board.get_winner()
             
             if winner != None:
-                print winner, "wins! Year:", self.year
-                
-                return 
+                #print winner, "wins! Year:", self.year
+                return winner, self.year 
 
             if self.year > 5000:
-                print "Took too long! Year:", self.year
-                return
+                #print "Took too long! Year:", self.year
+                return None, self.year
 
             #print "It is winter", self.year - 1
             self.play_build()

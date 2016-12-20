@@ -7,35 +7,37 @@ import random
 from datetime import datetime
 
 class AIGame:
-    def __init__(self, boardfile):
+    def __init__(self, boardfile, ai):
         self.board = Board(boardfile)
         self.players = self.board.get_players()
         self.year = 1900
         
-        random.seed(datetime.now())
-        index = random.randint(0, len(self.players) - 1)
+        #random.seed(datetime.now())
+        #index = random.randint(0, len(self.players) - 1)
 
-        self.ai = self.players[index]
+        self.ai = ai #self.players[index]
         self.players.remove(self.ai)
+
+        self.nnext = 5
+        self.ntrials = 400
 
     def play(self):
         while True:
+            print self.year
+
             self.board.update_centers()
             winner = self.board.get_winner()
             
             if winner != None:
-                return winner
+                return winner, self.year
 
-            if self.year > 5000:
-                return None
+            if self.year > 3000:
+                return None, self.year
 
-            #print "It is winter", self.year - 1
             self.play_build()
 
-            #print "It is spring", self.year
             self.play_moves(True)
 
-            #print "It is fall", self.year
             self.play_moves(False)
             
             self.year += 1
@@ -43,22 +45,22 @@ class AIGame:
     def play_build(self):
         build_set = []
        
-        for i in range(0, 20):
+        for i in range(0, self.nnext):
             builds = {}
             builds[self.ai] = self.board.get_all_rand_builds(self.ai)[self.ai]
             build_set.append([builds, 0, 0])
 
-        for i in range(0, 100):
+        for i in range(0, self.ntrials):
             random.seed(datetime.now())
-            index = random.randint(0, 19)
+            index = random.randint(0, self.nnext - 1)
 
-            build = build_set[index][0]
+            build = deepcopy(build_set[index][0])
             board = deepcopy(self.board)
 
             game = RandGameTrial(board, self.year + 1)
-            game.play_build(build)
-            game.play_moves({}, {}, {}, {})
-            game.play_moves({}, {}, {}, {})
+            game.play_build(build, self.ai)
+            game.play_moves({}, {}, {}, {}, None)
+            game.play_moves({}, {}, {}, {}, None)
             winner = game.play()
 
             if winner != None:
@@ -69,40 +71,40 @@ class AIGame:
 
         index = 0
 
-        for i in range(0, 20):
-            if build_set[index][2] == 0:
+        for i in range(0, self.nnext):
+            if build_set[index][1] == 0:
                 index = i
-            elif build_set[i][2] != 0:
+            elif build_set[i][1] != 0:
                 this_score = (1.0 * build_set[i][2]) / build_set[i][1]
                 best_score = (1.0 * build_set[index][2]) / build_set[index][1]
 
                 if this_score > best_score:
                     index = i
- 
+
         self.board.auto_execute_builds(build_set[index][0])
 
     def play_moves(self, is_spring):
         action_set = []
 
-        for i in range(0, 20):
+        for i in range(0, self.nnext):
             holds, moves, convoys, supports = self.board.get_all_rand_actions(self.ai)
             action_set.append([holds, moves, convoys, supports, 0, 0])
 
-        for i in range(0, 100):
-            random.seet(datetime.now())
-            index = random.randint(0, 19)
+        for i in range(0, self.ntrials):
+            random.seed(datetime.now())
+            index = random.randint(0, self.nnext - 1)
 
-            holds = action_set[index][0]
-            moves = action_set[index][1]
-            convoys = action_set[index][2]
-            supports = action_set[index][3]
+            holds = deepcopy(action_set[index][0])
+            moves = deepcopy(action_set[index][1])
+            convoys = deepcopy(action_set[index][2])
+            supports = deepcopy(action_set[index][3])
 
             board = deepcopy(self.board)
             game = RandGameTrial(board, self.year + 1)
-            game.play_moves(holds, moves, convoys, supports)
+            game.play_moves(holds, moves, convoys, supports, self.ai)
 
             if is_spring:
-                game.play_moves({}, {}, {}, {})
+                game.play_moves({}, {}, {}, {}, None)
 
             winner = game.play()
 
@@ -114,10 +116,10 @@ class AIGame:
 
         index = 0
 
-        for i in range(0, 20):
-            if action_set[index][2] == 0:
+        for i in range(0, self.nnext):
+            if action_set[index][4] == 0:
                 index = i
-            elif action_set[i][2] != 0:
+            elif action_set[i][4] != 0:
                 this_score = (1.0 * action_set[i][5]) / action_set[i][4]
                 best_score = (1.0 * action_set[index][5]) / action_set[index][4]
 
@@ -137,16 +139,16 @@ class AIGame:
         if len(retreat_locs.keys()) != 0:
             retreat_set = []
 
-            for i in range(0, 20):
+            for i in range(0, self.nnext):
                 retreats = {}
                 retreats[player] = self.board.get_all_rand_retreats(player)[player]
                 retreat_set.append([retreats, 0, 0])
 
-            for i in range(0, 100):
+            for i in range(0, self.ntrials):
                 random.seet(datetime.now())
-                index = random.randint(0, 19)
+                index = random.randint(0, self.nnext - 1)
 
-                retreats = retreat_set[index][0]
+                retreats = deepcopy(retreat_set[index][0])
 
                 board = deepcopy(self.board)
                 game = RandGameTrial(board, self.year + 1)
@@ -165,10 +167,10 @@ class AIGame:
 
             index = 0
 
-            for i in range(0, 20):
-                if aretreat_set[index][2] == 0:
+            for i in range(0, self.nnext):
+                if aretreat_set[index][1] == 0:
                     index = i
-                elif retreat_set[i][2] != 0:
+                elif retreat_set[i][1] != 0:
                     this_score = (1.0 * retreat_set[i][2]) / retreat_set[i][1]
                     best_score = (1.0 * retreat_set[index][2]) / retreat_set[index][1]
 

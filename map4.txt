@@ -1,0 +1,44 @@
+Players:
+France, Par, Bre, Mar, Spa, Por, Bel
+Italy, Rom
+Germany, Ber
+Russia, Mos
+Turkey, Con
+Austria, Vie
+Britain, Lon
+-
+Land provinces:
+Par, Bre, Rom
+Bre, Par, Mar, Ber
+Mar, Bre, Spa, Mos
+Spa, Mar, Por, Con
+Por, Spa, Bel, Vie
+Bel, Por, Lon
+Rom, Par, Rum, Bul, Ser, Hol, Nwy, Swe, Den
+Ber, Bre, Rum, Bul, Ser, Hol, Nwy, Swe, Den
+Mos, Mar, Rum, Bul, Ser, Hol, Nwy, Swe, Den
+Con, Spa, Rum, Bul, Ser, Hol, Nwy, Swe, Den
+Vie, Por, Rum, Bul, Ser, Hol, Nwy, Swe, Den
+Lon, Bel, Rum, Bul, Ser, Hol, Nwy, Swe, Den
+Rum, Bul, Ser, Hol, Nwy, Swe, Den, Rom, Ber, Mos, Con, Vie, Lon
+Bul, Rum, Ser, Hol, Nwy, Swe, Den, Rom, Ber, Mos, Con, Vie, Lon
+Ser, Rum, Bul, Hol, Nwy, Swe, Den, Rom, Ber, Mos, Con, Vie, Lon
+Hol, Rum, Bul, Ser, Nwy, Swe, Den, Rom, Ber, Mos, Con, Vie, Lon
+Nwy, Rum, Bul, Ser, Hol, Swe, Den, Rom, Ber, Mos, Con, Vie, Lon
+Swe, Rum, Bul, Ser, Hol, Nwy, Den, Rom, Ber, Mos, Con, Vie, Lon
+Den, Rum, Bul, Ser, Hol, Nwy, Swe, Rom, Ber, Mos, Con, Vie, Lon
+-
+Sea provinces:
+-
+Coasts:
+-
+Centers:
+Rum
+Bul
+Ser
+Hol
+Nwy
+Swe
+Den
+-
+endoffile

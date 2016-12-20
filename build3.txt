@@ -1,0 +1,19 @@
+Russia
+build fleet Den
+build fleet Ska
+build army Fin
+build army Stp
+build fleet Pru
+build army Mos
+build fleet Aeg
+build fleet Ven
+build fleet Bot
+build fleet Bal
+-
+Germany
+build army Nwy
+build army Vie
+build fleet Adr
+build army Syr
+build army Mar
+build army Lvn

@@ -1,0 +1,33 @@
+Players:
+Italy, Ven
+France, Par, Bre
+Germany, Rom
+-
+Land provinces:
+Ven, Rom, Lon
+Rom, Ven, Lpl
+Par, Bre, Lon
+Bre, Par, Lpl
+Lon, Ven, Par, Stp
+Lpl, Rom, Bre, Mos
+Stp, Lon
+Mos, Lpl
+-
+Sea provinces:
+Adr, Ven, Par, Lon, Stp
+Aeg, Rom, Bre, Lpl, Mos
+-
+Coasts:
+Ven, Lon
+Rom, Lpl
+Par, Lon
+Bre, Lpl
+Stp, Lon
+Mos, Lpl
+Lon, Ven, Par, Stp
+Lpl, Rom, Bre, Mos
+-
+Centers:
+Lon
+-
+endoffile
